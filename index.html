@@ -256,7 +256,7 @@
                .add(TweenMax.to("#hiya", 0.00001, {display:"none"}))
                .add(TweenMax.to("#navbar", 0.00001, {display:"block"}))
                .add(TweenMax.to("#wipe", 0.5, {width: "0%"}))
-               .add(TweenMax.from("#info_card", 1, {transform: "rotateY(90deg)"}));
+               .add(TweenMax.from("#info_card", 1, { rotationY: 90 }));
 
             var scene = new ScrollScene({
                   triggerElement: "#intro",
@@ -272,8 +272,8 @@
          // From #Info to #Cake
          {
             var ani = new TimelineMax()
-               .add(TweenMax.to("#info_card", 1, {transform: "rotateY(90deg)"}))
-               .add(TweenMax.from("#cake_card", 1, {transform: "rotateY(90deg)"}))
+               .add(TweenMax.to("#info_card", 1, { rotationY: 90 }))
+               .add(TweenMax.from("#cake_card", 1, { rotationY: 90 }));
 
             var scene = new ScrollScene({
                   triggerElement: "#info",
@@ -287,8 +287,8 @@
          // From #Cake to #Sup
          {
             var ani = new TimelineMax()
-               .add(TweenMax.to("#cake_card", 1, {transform: "rotateY(90deg)"}))
-               .add(TweenMax.from("#sup_card", 1, {transform: "rotateY(90deg)"}))
+               .add(TweenMax.to("#cake_card", 1, { rotationY: 90 }))
+               .add(TweenMax.from("#sup_card", 1, { rotationY: 90 }));
 
             var scene = new ScrollScene({
                   triggerElement: "#cake",
@@ -302,8 +302,8 @@
          // From #Sup to #Book
          {
             var ani = new TimelineMax()
-            .add(TweenMax.to("#sup_card", 1, {transform: "rotateY(90deg)"}))
-            .add(TweenMax.from("#book_card", 1, {transform: "rotateY(90deg)"}))
+               .add(TweenMax.to("#sup_card", 1, { rotationY: 90 }))
+               .add(TweenMax.from("#book_card", 1, { rotationY: 90 }));
 
             var scene = new ScrollScene({
                   triggerElement: "#sup",
