@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <title>Mr. Greenbanks WonderBook Emporium</title>
+
+   <script type="text/javascript" src="js/_dependent/greensock/TweenMax.min.js"></script>
+   <script type="text/javascript" src="js/_dependent/greensock/plugins/ScrollToPlugin.min.js"></script>
+   <script type="text/javascript" src="js/_dependent/jquery.min.js"></script>
+   <script type="text/javascript" src="js/_examples/modernizr.custom.min.js"></script>
+   <script type="text/javascript" src="js/_mobile/iscroll.js"></script>
+   <script type="text/javascript" src="js/jquery.scrollmagic.min.js"></script>
+   <script type="text/javascript" src="js/jquery.scrollmagic.debug.js"></script>
+   <script type="text/javascript" src="js/_examples/demo.js"></script>
+
+   <style type="text/css">
+      body {
+         background-color: #000;
+         color: #fff;
+         margin: 0;
+      }
+
+      body, html {
+         height: 100%
+      }
+
+      section {
+         width: 100%;
+         height: 100%;
+      }
+
+      #content-wrapper {
+         height: 100%;
+         width: 100%;
+      }
+
+      #intro {
+         width: 100%;
+         z-index: 3;
+      }
+
+      #intro #wipe {
+         height: 100%;
+         width: 0;
+         top: 0;
+         left: 0;
+         position: absolute;
+         background-color: #fff;
+      }
+
+      .content {
+         position: relative;
+         left: 50%;
+         top: 20%;
+         width: 40%;
+      }
+
+      #navbar {
+         position: fixed;
+         width: 100%;
+         top: 0;
+         height: 60px;
+         background-color: #000;
+         color: #fff;
+         display: none;
+         z-index: 2;
+      }
+
+      #navbar span {
+         position: absolute;
+         bottom: 0;
+         width: 100%;
+         text-align: center;
+         margin-bottom: 10px;
+      }
+      a:link {
+         color: #fff;
+      }
+      a:visited {
+         color: #fff;
+      }
+      a:hover {
+         color: #fff;
+      }
+      a:active {
+         color: #fff;
+      }
+
+      .card {
+         position: fixed;
+         left: 10%;
+         width: 20%;
+         top: 30%;
+         height: 50%;
+         background-color: #fff;
+         color: #000;
+      }
+   </style>
+</head>
+<body>
+   <div id="content-wrapper">
+      <script type="text/javascript">
+         // Some bullshit copy and pasted from somehwere else
+         var controller;
+         if (Modernizr.touch) {
+            var myScroll;
+            $(document).ready(function () {
+               // wrap for iscroll
+               $("#content-wrapper")
+                  .addClass("scrollContainer")
+                  .wrapInner('<div class="scrollContent"></div>');
+
+               // add iScroll
+               myScroll = new IScroll('#content-wrapper', {scrollX: false, scrollY: true, scrollbars: true, useTransform: false, useTransition: false, probeType: 3});
+               
+               // update container on scroll
+               myScroll.on("scroll", function () {
+                  controller.update();
+               });
+
+               // overwrite scroll position calculation to use child's offset instead of parents scrollTop();
+               controller.scrollPos(function () {
+                  return -myScroll.y;
+               });
+
+               // refresh height, so all is included.
+               setTimeout(function () {
+                   myScroll.refresh();
+               }, 0);
+
+               $("#content-wrapper").on("touchend", "a", function (e) {
+                  // a bit dirty workaround for links not working in iscroll for some reason...
+                  e.preventDefault();
+                  window.location.href = $(this).attr("href");
+               });
+
+               // manual set hight (so height 100% is available within scroll container)
+               $(document).on("orientationchange", function () {
+                  $("section")
+                     .css("min-height", $(window).height())
+                     .parent(".scrollmagic-pin-spacer").css("min-height", $(window).height());
+               });
+               $(document).trigger("orientationchange"); // trigger to init
+            });
+            // init the controller
+            controller = new ScrollMagic({
+               container: "#content-wrapper",
+               globalSceneOptions: {
+                  triggerHook: "onLeave"
+               }
+            });
+         } else {
+            // init the controller
+            controller = new ScrollMagic({
+               globalSceneOptions: {
+                  triggerHook: "onLeave"
+               }
+            });
+         }
+      </script>
+      
+      <section id="intro">
+         <div id="trigger" style="min-height: 1px"></div>
+         <div id="pinme" style="width:100%;height:100%;">
+            <div id="hiya" style="width: 100%; height: 100%;">
+               <div style="position: absolute; left: 30%; top: 30%; width: 40%; height: 40%; background: #fff; color: #000; text-align: center">
+                  Hiya!
+               </div>
+            </div>
+            <div id="wipe">
+            </div>
+         </div>
+      </section>
+
+      <div id="navbar">
+         <span style="display:inline-block; vertical-align:middle">
+            <a href="#info">Info</a>
+            <a href="#cake">Cake</a>
+            <a href="#sup">Sup</a>
+            <a href="#book">Book</a>
+         </span>
+      </div>
+
+      <section id="info">
+         <div id="info_text" class="content">
+            <h1>Info</h1>
+            <p>
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus viverra augue vitae urna dignissim commodo. Curabitur sit amet vehicula est. Cras dolor velit, tincidunt non molestie a, porta id metus. Quisque massa mauris, iaculis quis suscipit ac, fringilla et ante. In tempus non justo ac tincidunt. Aliquam accumsan ac libero dignissim semper. Integer at rutrum dolor, at suscipit nulla. Integer facilisis a neque at ultrices. Nunc gravida felis a nulla blandit pharetra. In dictum tincidunt suscipit. Donec et quam dapibus, hendrerit velit sit amet, tincidunt arcu. Phasellus sit amet dignissim enim. Praesent rhoncus magna et lacus consequat condimentum. Duis ut vulputate odio, lacinia ornare justo. Morbi tristique vitae mi quis gravida.
+            </p>
+         </div>
+         <div id="info_card" class="card">
+            I<br/>N<br/>F<br/>O
+         </div>
+      </section>
+      
+      <section id="cake">
+         <div id="cake_text" class="content">
+            <h1>Cake</h1>
+            <p>
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus viverra augue vitae urna dignissim commodo. Curabitur sit amet vehicula est. Cras dolor velit, tincidunt non molestie a, porta id metus. Quisque massa mauris, iaculis quis suscipit ac, fringilla et ante. In tempus non justo ac tincidunt. Aliquam accumsan ac libero dignissim semper. Integer at rutrum dolor, at suscipit nulla. Integer facilisis a neque at ultrices. Nunc gravida felis a nulla blandit pharetra. In dictum tincidunt suscipit. Donec et quam dapibus, hendrerit velit sit amet, tincidunt arcu. Phasellus sit amet dignissim enim. Praesent rhoncus magna et lacus consequat condimentum. Duis ut vulputate odio, lacinia ornare justo. Morbi tristique vitae mi quis gravida.
+            </p>
+         </div>
+         <div id="cake_card" class="card">
+            C<br/>A<br/>K<br/>E
+         </div>
+      </section>
+
+      <section id="sup">
+         <div id="sup_text" class="content">
+            <h1>Sup</h1>
+            <p>
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus viverra augue vitae urna dignissim commodo. Curabitur sit amet vehicula est. Cras dolor velit, tincidunt non molestie a, porta id metus. Quisque massa mauris, iaculis quis suscipit ac, fringilla et ante. In tempus non justo ac tincidunt. Aliquam accumsan ac libero dignissim semper. Integer at rutrum dolor, at suscipit nulla. Integer facilisis a neque at ultrices. Nunc gravida felis a nulla blandit pharetra. In dictum tincidunt suscipit. Donec et quam dapibus, hendrerit velit sit amet, tincidunt arcu. Phasellus sit amet dignissim enim. Praesent rhoncus magna et lacus consequat condimentum. Duis ut vulputate odio, lacinia ornare justo. Morbi tristique vitae mi quis gravida.
+            </p>
+         </div>
+         <div id="sup_card" class="card">
+            S<br/>U<br/>P
+         </div>
+      </section>
+
+      <section id="book">
+         <div id="book_text" class="content">
+            <h1>Book</h1>
+            <p>
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus viverra augue vitae urna dignissim commodo. Curabitur sit amet vehicula est. Cras dolor velit, tincidunt non molestie a, porta id metus. Quisque massa mauris, iaculis quis suscipit ac, fringilla et ante. In tempus non justo ac tincidunt. Aliquam accumsan ac libero dignissim semper. Integer at rutrum dolor, at suscipit nulla. Integer facilisis a neque at ultrices. Nunc gravida felis a nulla blandit pharetra. In dictum tincidunt suscipit. Donec et quam dapibus, hendrerit velit sit amet, tincidunt arcu. Phasellus sit amet dignissim enim. Praesent rhoncus magna et lacus consequat condimentum. Duis ut vulputate odio, lacinia ornare justo. Morbi tristique vitae mi quis gravida.
+            </p>
+         </div>
+         <div id="book_card" class="card">
+            B<br/>O<br/>O<br/>K
+         </div>
+      </section>
+
+      <script type="text/javascript">
+         // From #intro to #info
+         {
+            var ani = new TimelineMax()
+               .add(TweenMax.to("#wipe", 0.5, {width: "100%"}))
+               .add(TweenMax.to("#hiya", 0.00001, {display:"none"}))
+               .add(TweenMax.to("#navbar", 0.00001, {display:"block"}))
+               .add(TweenMax.to("#wipe", 0.5, {width: "0%"}))
+               .add(TweenMax.from("#info_card", 1, {transform: "rotateY(90deg)"}));
+
+            var scene = new ScrollScene({
+                  triggerElement: "#intro",
+                  duration: $(window).height()
+               })
+               .setTween(ani)
+               .setPin("#pinme")
+               .addTo(controller);
+
+            scene.addIndicators();
+         }
+
+         // From #Info to #Cake
+         {
+            var ani = new TimelineMax()
+               .add(TweenMax.to("#info_card", 1, {transform: "rotateY(90deg)"}))
+               .add(TweenMax.from("#cake_card", 1, {transform: "rotateY(90deg)"}))
+
+            var scene = new ScrollScene({
+                  triggerElement: "#info",
+                  duration: $(window).height()
+               })
+               .setTween(ani)
+               .addTo(controller);
+            scene.addIndicators();
+         }
+
+         // From #Cake to #Sup
+         {
+            var ani = new TimelineMax()
+               .add(TweenMax.to("#cake_card", 1, {transform: "rotateY(90deg)"}))
+               .add(TweenMax.from("#sup_card", 1, {transform: "rotateY(90deg)"}))
+
+            var scene = new ScrollScene({
+                  triggerElement: "#cake",
+                  duration: $(window).height()
+               })
+               .setTween(ani)
+               .addTo(controller);
+            scene.addIndicators();
+         }
+
+         // From #Sup to #Book
+         {
+            var ani = new TimelineMax()
+            .add(TweenMax.to("#sup_card", 1, {transform: "rotateY(90deg)"}))
+            .add(TweenMax.from("#book_card", 1, {transform: "rotateY(90deg)"}))
+
+            var scene = new ScrollScene({
+                  triggerElement: "#sup",
+                  duration: $(window).height()
+               })
+               .setTween(ani)
+               .addTo(controller);
+            scene.addIndicators();
+         }
+      </script>
+   </div>
+</body>
+</html>
