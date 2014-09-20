@@ -9,14 +9,17 @@
    <script type="text/javascript" src="js/ScrollToPlugin.min.js"></script>
    <script type="text/javascript" src="js/modernizr.min.js"></script>
    <script type="text/javascript" src="js/iscroll-probe.js"></script>
-   <script type="text/javascript" src="js/scrollmagic.min.js"></script>
-   <script type="text/javascript" src="js/scrollmagic.debug.js"></script>
+   <link rel="stylesheet" href="webfontkit-20140901-164210/stylesheet.css" type="text/css" charset="utf-8" />
 
    <style type="text/css">
       body {
          background-color: #000;
-         color: #fff;
+         color: #eee;
          margin: 0;
+         font-family: 'grotesque_mtregular';
+         font-size: 18px;
+         font-weight: lighter;
+         line-height: 120%;
       }
 
       body, html {
@@ -47,286 +50,343 @@
          background-color: #fff;
       }
 
+      .fixpos {
+         position: fixed;
+      }
+
+      a:link {
+         color: #fff;
+         text-decoration: none;
+         font-weight: bold;
+      }
+
+      a:visited {
+         color: #fff;
+         text-decoration: none;
+      }
+
+      a:hover {
+         color: #ccc;
+         text-decoration: underline;
+      }
+
+      a:active {
+         color: #fff;
+         text-decoration: none;
+      }
+
       .content {
-         position: relative;
-         left: 50%;
-         top: 20%;
-         width: 40%;
+         padding-left: 560px;
+         padding-top: 100px;
+         padding-right: 100px;
+         padding-bottom: 200px;
+         min-height: 400px;
+      }
+
+      .content_spinner {
+         position: fixed;
+         height: 100%;
+         left: 100px;
+         width: 360px;
+         top: 50%;
+         margin-top: -244px;
+      }
+
+      .first_content_spinner {
+         position: absolute;
+         left: 100px;
+         width: 360px;
       }
 
       #navbar {
-         position: fixed;
          width: 100%;
-         top: 0;
-         height: 60px;
+         height: 80px;
          background-color: #000;
-         color: #fff;
-         display: none;
          z-index: 2;
-      }
-
-      #navbar span {
-         position: absolute;
-         bottom: 0;
-         width: 100%;
-         text-align: center;
-         margin-bottom: 10px;
-      }
-      a:link {
-         color: #fff;
-      }
-      a:visited {
-         color: #fff;
-      }
-      a:hover {
-         color: #fff;
-      }
-      a:active {
-         color: #fff;
-      }
-
-      .card_container {
          position: fixed;
-         left: 10%;
-         width: 20%;
-         top: 30%;
-         height: 50%;
+         left: 0;
+         top: 0;
       }
 
-      .card {
-         background-color: #fff;
-         color: #000;
+      #navbar > table {
          width: 100%;
          height: 100%;
+      }
+
+      #title {
+         width: 300px;
+         font-family: 'times_new_roman_mtregular';
+         font-size: 70px;
+      }
+
+      #links {
+         max-width: 99%;
+         word-spacing: 10px;
+      }
+
+      #social {
+         width: 200px;
+         letter-spacing: 10px;
+      }
+
+      h2 {
+         margin-bottom: 0;
+      }
+
+      p.indent {
+         margin-left: 1em;
+         margin-top: 0.5em;
       }
    </style>
 </head>
 <body>
-   <div id="content-wrapper">
-      <script type="text/javascript">
-         // Some bullshit copy and pasted from somehwere else
-         var controller;
-         if (Modernizr.touch) {
-            var myScroll;
-            $(document).ready(function () {
-               // wrap for iscroll
-               $("#content-wrapper")
-                  .addClass("scrollContainer")
-                  .wrapInner('<div class="scrollContent"></div>');
+   <div id="intro" style="width: 100%; margin-top: 60px">
+      <img src="imgs/kiosk-home.png" style="margin-left: auto; margin-right: auto; display: block" />
+   </div>
 
-               // add iScroll
-               myScroll = new IScroll('#content-wrapper', {scrollX: false, scrollY: true, scrollbars: true, useTransform: false, useTransition: false, probeType: 3});
-               
-               // update container on scroll
-               myScroll.on("scroll", function () {
-                  controller.update();
-               });
+   <div id="navbar">
+      <table>
+         <tr>
+            <td id="title">
+               <div style="margin-left: 15px; margin-top: 15px;">
+                  Kiosk
+               </div>
+            </td>
+            <td id="links" align="center">
+               <div style="margin-left: -100px">
+                  <a href="#about">About</a>
+                  <a href="#contributors">Contributors</a>
+                  <a href="#visit">Visit</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#shop">Shop</a>
+                  <a href="http://k-i-o-s-k.tumblr.com/">Blog</a>
+               </div>
+            </td>
+            <td id="social" align="center">
+               <a href="https://www.facebook.com/kioskbooks"><img src="imgs/fb_icon.png" width="21" height="21" /></a>
+               <a href="https://twitter.com/kioskbooks"><img src="imgs/tw_icon.png" width="20" height="21" /></a>
+            </td>
+         </tr>
+      </table>
+   </div>
 
-               // overwrite scroll position calculation to use child's offset instead of parents scrollTop();
-               controller.scrollPos(function () {
-                  return -myScroll.y;
-               });
+   <a id="about"></a>
+   <div id="trigger1" style="width: 100%; height: 10px;"></div>
 
-               // refresh height, so all is included.
-               setTimeout(function () {
-                   myScroll.refresh();
-               }, 0);
+   <div style="width: 100%;">
+      <div style="float: left; margin-top: 244px" id="trigger1_spin" ></div>
+      <div class="first_content_spinner" id="first_spinner">
+         <img id="spinner1" src="imgs/about_spinner.png" />
+      </div>
+      <div class="content">
+         <p>
+            Kiosk is an independent temporary bookshop with a focus on self-publishing, based inside café &amp; bar, <a href="http://www.thepeckhampelican.co.uk/">The Peckham Pelican</a> and held on the occasion of the <a href="http://artlicksweekend.com/">Art Licks Weekend 2014</a>. It is a platform designed to give a voice to emerging artists, illustrators, designers and small press publishers by promoting their work and making it available for sale.
+         </p>
+         <p>
+            Items for sale will include self-published books, zines, magazines, prints and ceramics from a wide variety of independent and talented contributors. Kiosk is a non-profit project, with profits going back to the shop's contributors.
+         </p>
+         <p>
+            We have also commissioned a select group of new artists &amp; designers to contribute a zine exclusively for Kiosk. These will be exhibited &amp; sold for the duration of the weekend as well as afterwards. 
+         </p>
+         <p>
+            Kiosk will be open from Thursday 2 October – Sunday 5 October, with an opening night on Thursday evening at the Pelican to celebrate the launch of the bookshop from 7.30pm–11pm.
+         </p>
+      </div>
+   </div>
 
-               $("#content-wrapper").on("touchend", "a", function (e) {
-                  // a bit dirty workaround for links not working in iscroll for some reason...
-                  e.preventDefault();
-                  window.location.href = $(this).attr("href");
-               });
+   <a id="contributors"></a>
+   <div id="trigger2" style="width: 100%; height: 10px;"></div>
+   
+   <div style="width: 100%;">
+      <div class="content">
+         <p>
+            Kiosk would like to especially thank Good Press, Sub Press &amp; Desktop Anxiety for their extremely generous donations towards the shop.
+         </p>
+         <p>
+            <a href="http://www.amannyahmad.com/">Amanny Ahmad</a> ???<br />
+            <a href="http://www.alexdavenport.co.uk/">Alexandra Davenport</a><br />
+            <a href="http://benrayner.com/">Ben Rayner</a><br />
+            <a href="http://www.breakdownpress.com/">Breakdown Press</a><br />
+            <a href="http://bronze-age.net/">Bronze Age Editions</a><br />
+            <a href="http://www.cataloguelibrary.co.uk/">Catalogue Library</a><br />
+            <a href="http://www.caferoyalbooks.com/">Café Royal Books</a> ???<br />
+            <a href="http://www.charlottemei.com/">Charlotte Mei</a><br />
+            <a href="http://chrisharnan.tumblr.com/">Chris Harnan</a> ???<br />
+            <a href="http://www.colophon-foundry.org/">Colophon Foundry</a> ???<br />
+            <a href="http://www.desktop-anxiety.com/">Desktop Anxiety</a><br />
+            <a href="http://dominickesterton.tumblr.com/">Dominic Kesterton</a> ???<br />
+            <a href="http://www.eilissearson.com/portfolio/Home.html">Eilis Searson</a><br />
+            <a href="http://iamsherwin.com/">Emily Sherwin</a><br />
+            <a href="http://www.eyebodega.com/">Eye Bodega</a><br />
+            <a href="http://home.fourteen-nineteen.com/about">Fourteen-Nineteen</a><br />
+            <a href="http://www.goodpressgallery.co.uk/">Good Press</a><br />
+            <a href="http://hatopress.net/">Hato Press</a><br />
+            <a href="http://ikbird.com/">Ian Kenneth Bird</a><br />
+            <a href="http://www.jamieallanshaw.co.uk/">Jamie Allan Shaw</a><br />
+            <a href="http://jazzdadbooks.tumblr.com/">Jazz Dad Books</a><br />
+            <a href="http://www.kiatas.me/">Kia Tasbihgou</a> ???<br />
+            <a href="http://www.law-mag.com/">Law Magazine</a><br />
+            <a href="http://mwillis.eu/works/">Michael Willis</a><br />
+            <a href="http://www.museumspress.co.uk/">Museums Press</a><br />
+            <a href="http://nousvous.eu/">Nous Vous</a><br />
+            <a href="http://www.oliostudio.co.uk/">Olio</a><br />
+            <a href="http://oomk.net/">OOMK</a><br />
+            <a href="http://www.theplantationstudio.com/">The Plantation Journal</a><br />
+            <a href="http://www.selfpublishbehappy.com/">Self Publish Be Happy</a><br />
+            <a href="http://skulllparadise.tumblr.com/">Skull Paradise</a> ???<br />
+            <a href="http://www.studio-operative.co.uk/">Studio Operative</a><br />
+            <a href="http://sub-press.com/">Sub Press</a><br />
+         </p>
+      </div>
+      <div class="content_spinner">
+         <img id="spinner2" src="imgs/contributor_spinner.png"/>
+      </div>
+   </div>
 
-               // manual set hight (so height 100% is available within scroll container)
-               $(document).on("orientationchange", function () {
-                  $("section")
-                     .css("min-height", $(window).height())
-                     .parent(".scrollmagic-pin-spacer").css("min-height", $(window).height());
-               });
-               $(document).trigger("orientationchange"); // trigger to init
-            });
-            // init the controller
-            controller = new ScrollMagic({
-               container: "#content-wrapper",
-               globalSceneOptions: {
-                  triggerHook: "onLeave"
-               }
-            });
-         } else {
-            // init the controller
-            controller = new ScrollMagic({
-               globalSceneOptions: {
-                  triggerHook: "onLeave"
-               }
-            });
+   <a id="visit"></a>
+   <div id="trigger3" style="width: 100%; height: 10px;"></div>
+
+   <div style="width: 100%;">
+      <div class="content">
+         <p>
+            Kiosk will be occupying the stage area inside <a href="http://thepeckhampelican.co.uk/">The Peckham Pelican</a>, open from Thursday 2 October – Sunday 5 October.
+         </p>
+         <p>
+            <a href="https://www.google.co.uk/maps/preview?ie=UTF-8&fb=1&gl=uk&sll=51.474169,-0.077317&sspn=0.0205293,0.0439461&cid=8028205269139543766&q=The+Peckham+Pelican&ei=fxkOVPGXCoLYarv1gZAE&ved=0CJcBEPwSMA8">92 Peckham Road, London, SE15 5PY</a><br />
+            <a href="http://thepeckhampelican.co.uk/">thepeckhampelican.co.uk</a>
+         </p>
+         <p>
+            <h2>Opening hours</h2>
+            <p class="indent">
+               Thurs 2 Oct 3pm–11pm<br/>
+               Fri 3 Oct 12pm–10pm<br/>
+               Sat 4 Oct 12pm–10pm<br/>
+               Sun 5 Oct 12pm–9pm<br/><br/>
+               (Happy hour: Thurs/Fri 5pm–7pm)<br/>
+            </p>
+         </p>
+         <p>
+            <h2>Party</h2>
+            <p class="indent">
+               We are throwing a launch party to celebrate the opening of Kiosk &amp; the start of the Art Licks Weekendon Thursday from 7pm–11pm. The Thigh Gaps will be providing DJ skills, there will be live drawing from <a href="http://patrickmacdonald9.tumblr.com/">Pat Macdonald</a> &amp; <a href="http://elliotfreeman.co.uk/">Elliot Freeman</a>, and <a href="http://kingzog.com/">King Zog</a> &amp; <a href="http://www.kyleplatts.com/">Kyle Platts</a> will be auctioning off their book, 'Tracing Emin', with all proceeds going to Art Against Knives.
+               <br /><br />
+               <a href="https://www.facebook.com/events/324334551078234/?fref=ts">Attend on Facebook.</a>
+            </p>
+         </p>
+      </div>
+      <div class="content_spinner">
+         <img id="spinner3" src="imgs/visit_spinner.png"/>
+      </div>
+   </div>
+
+   <a id="contact"></a>
+   <div id="trigger4" style="width: 100%; height: 10px;"></div>
+
+   <div style="width: 100%;">
+      <div class="content">
+         <p>
+            For further information don’t hesitate to get in touch.<br />
+               <a href="mailto:kioskbooks@gmail.com">kioskbooks@gmail.com</a>
+         </p>
+         <p>
+            <h2>Follow us on</h2>
+            <p class="indent">
+               <a href="http://k-i-o-s-k.tumblr.com/">Tumblr</a><br />
+               <a href="https://twitter.com/kioskbooks">Twitter</a><br />
+               <a href="https://www.facebook.com/kioskbooks">Facebook</a>
+            </p>
+         </p>
+         <p>
+            <h2>Partners</h2>
+            <p class="indent">
+               <a href="http://thepeckhampelican.co.uk/">thepeckhampelican.co.uk</a><br />
+               <a href="http://artlicksweekend.com/">artlicksweekend.com</a>
+            </p>
+         </p>
+      </div>
+      <div class="content_spinner">
+         <img id="spinner4" src="imgs/contact_spinner.png"/>
+      </div>
+   </div>
+
+   <a id="shop"></a>
+   <div id="trigger5" style="width: 100%; height: 10px;"></div>
+
+   <div style="width: 100%;">
+      <div class="content">
+      </div>
+      <div class="content_spinner">
+         <img id="spinner5" src="imgs/shop_spinner.png"/>
+      </div>
+   </div>
+
+   <div id="trigger6" style="width: 100%; height: 10px;"></div>
+
+   <script type="text/javascript" src="js/scrollmagic.min.js"></script>
+   <script type="text/javascript" src="js/scrollmagic.debug.js"></script>
+   <script>
+      $(document).ready(function($) {
+         var controller = new ScrollMagic();
+
+         function getDurationFunc(elem1, elem2) {
+            return function() {
+               return elem1.getBoundingClientRect().top
+                    - elem2.getBoundingClientRect().top; 
+            };
          }
-         
-         // change behaviour of anchor links to scroll instead of jump
-         $(document).on("click touchend", "a[href^=#]", function (e) {
-            var
-               id = $(this).attr("href"),
-               $elem = $(id);
-            if ($elem.length > 0) {
+
+         function addScene(startTriggerID, endTriggerID, spinnerID) {
+            var spinner = '#' + spinnerID;
+            var trigger = '#' + startTriggerID;
+
+            var ani = new TimelineMax()
+               .add(TweenMax.set(spinner, {transform: "rotateY(90deg)"}))
+               .add(TweenMax.to(spinner, 1.0, {transform: "rotateY(0deg)"}))
+               .add(TweenMax.to(spinner, 1.0, {transform: "rotateY(90deg)"}));
+
+            var elem1 = document.getElementById(startTriggerID);
+            var elem2 = document.getElementById(endTriggerID);
+
+            new ScrollScene({triggerElement: trigger})
+               .setTween(ani)
+               .duration(function(){ return elem2.getBoundingClientRect().top
+                    - elem1.getBoundingClientRect().top; })
+               .addTo(controller);
+         }
+
+         addScene('trigger1', 'trigger2', 'spinner1');
+         addScene('trigger2', 'trigger3', 'spinner2');
+         addScene('trigger3', 'trigger4', 'spinner3');
+         addScene('trigger4', 'trigger5', 'spinner4');
+         addScene('trigger5', 'trigger6', 'spinner5');
+
+         new ScrollScene({triggerElement: '#trigger1_spin'})
+            .duration(10)
+            .on('enter', function(){ document.getElementById('first_spinner').className = 'content_spinner'; })
+            .on('leave', function(evt){ if (evt.state === 'BEFORE') { document.getElementById('first_spinner').className = 'first_content_spinner'; } })
+            .addTo(controller);
+
+         // change behaviour of controller to animate scroll instead of jump
+         controller.scrollTo(function (newpos) {
+            TweenMax.to(window, 0.5, {scrollTo: {y: newpos}});
+         });
+
+         //  bind scroll to anchor links
+         $(document).on("click", "a[href^=#]", function (e) {
+            var id = $(this).attr("href");
+            if ($(id).length > 0) {
                e.preventDefault();
-               if (Modernizr.touch && myScroll) { // mobile
-                  myScroll.scrollTo(0, -$elem.offset().top-myScroll.y, 1000, IScroll.utils.ease.quadratic)
-                  // TweenMax.to(myScroll, 1, {y: -$elem.offset().top-$(".scrollContent").offset().top});
-               } else {
-                  TweenMax.to(window, 1, {scrollTo: {y: $elem.offset().top}});
-                  if (window.history && window.history.pushState) {
-                     // if supported by the browser we can even update the URL.
-                     history.pushState("", document.title, id);
-                  }
+
+               // trigger scroll
+               controller.scrollTo(id);
+
+                  // if supported by the browser we can even update the URL.
+               if (window.history && window.history.pushState) {
+                  history.pushState("", document.title, id);
                }
             }
          });
-      </script>
-      
-      <section id="intro">
-         <div id="trigger" style="min-height: 1px"></div>
-         <div id="pinme" style="width:100%;height:100%;">
-            <div id="hiya" style="width: 100%; height: 100%;">
-               <div style="position: absolute; left: 30%; top: 30%; width: 40%; height: 40%; background: #fff; color: #000; text-align: center">
-                  Hiya!
-               </div>
-            </div>
-            <div id="wipe">
-            </div>
-         </div>
-      </section>
-
-      <div id="navbar">
-         <span style="display:inline-block; vertical-align:middle">
-            <a href="#info">Info</a>
-            <a href="#cake">Cake</a>
-            <a href="#sup">Sup</a>
-            <a href="#book">Book</a>
-         </span>
-      </div>
-
-      <section id="info">
-         <div id="info_text" class="content">
-            <h1>Info</h1>
-            <p>
-               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus viverra augue vitae urna dignissim commodo. Curabitur sit amet vehicula est. Cras dolor velit, tincidunt non molestie a, porta id metus. Quisque massa mauris, iaculis quis suscipit ac, fringilla et ante. In tempus non justo ac tincidunt. Aliquam accumsan ac libero dignissim semper. Integer at rutrum dolor, at suscipit nulla. Integer facilisis a neque at ultrices. Nunc gravida felis a nulla blandit pharetra. In dictum tincidunt suscipit. Donec et quam dapibus, hendrerit velit sit amet, tincidunt arcu. Phasellus sit amet dignissim enim. Praesent rhoncus magna et lacus consequat condimentum. Duis ut vulputate odio, lacinia ornare justo. Morbi tristique vitae mi quis gravida.
-            </p>
-         </div>
-         <div class="card_container">
-            <div id="info_card" class="card">
-               I<br/>N<br/>F<br/>O
-            </div>
-         </div>
-      </section>
-      
-      <section id="cake">
-         <div id="cake_text" class="content">
-            <h1>Cake</h1>
-            <p>
-               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus viverra augue vitae urna dignissim commodo. Curabitur sit amet vehicula est. Cras dolor velit, tincidunt non molestie a, porta id metus. Quisque massa mauris, iaculis quis suscipit ac, fringilla et ante. In tempus non justo ac tincidunt. Aliquam accumsan ac libero dignissim semper. Integer at rutrum dolor, at suscipit nulla. Integer facilisis a neque at ultrices. Nunc gravida felis a nulla blandit pharetra. In dictum tincidunt suscipit. Donec et quam dapibus, hendrerit velit sit amet, tincidunt arcu. Phasellus sit amet dignissim enim. Praesent rhoncus magna et lacus consequat condimentum. Duis ut vulputate odio, lacinia ornare justo. Morbi tristique vitae mi quis gravida.
-            </p>
-         </div>
-         <div class="card_container">
-            <div id="cake_card" class="card">
-               C<br/>A<br/>K<br/>E
-            </div>
-         </div>
-      </section>
-
-      <section id="sup">
-         <div id="sup_text" class="content">
-            <h1>Sup</h1>
-            <p>
-               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus viverra augue vitae urna dignissim commodo. Curabitur sit amet vehicula est. Cras dolor velit, tincidunt non molestie a, porta id metus. Quisque massa mauris, iaculis quis suscipit ac, fringilla et ante. In tempus non justo ac tincidunt. Aliquam accumsan ac libero dignissim semper. Integer at rutrum dolor, at suscipit nulla. Integer facilisis a neque at ultrices. Nunc gravida felis a nulla blandit pharetra. In dictum tincidunt suscipit. Donec et quam dapibus, hendrerit velit sit amet, tincidunt arcu. Phasellus sit amet dignissim enim. Praesent rhoncus magna et lacus consequat condimentum. Duis ut vulputate odio, lacinia ornare justo. Morbi tristique vitae mi quis gravida.
-            </p>
-         </div>
-         <div class="card_container">
-            <div id="sup_card" class="card">
-               S<br/>U<br/>P
-            </div>
-         </div>
-      </section>
-
-      <section id="book">
-         <div id="book_text" class="content">
-            <h1>Book</h1>
-            <p>
-               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus viverra augue vitae urna dignissim commodo. Curabitur sit amet vehicula est. Cras dolor velit, tincidunt non molestie a, porta id metus. Quisque massa mauris, iaculis quis suscipit ac, fringilla et ante. In tempus non justo ac tincidunt. Aliquam accumsan ac libero dignissim semper. Integer at rutrum dolor, at suscipit nulla. Integer facilisis a neque at ultrices. Nunc gravida felis a nulla blandit pharetra. In dictum tincidunt suscipit. Donec et quam dapibus, hendrerit velit sit amet, tincidunt arcu. Phasellus sit amet dignissim enim. Praesent rhoncus magna et lacus consequat condimentum. Duis ut vulputate odio, lacinia ornare justo. Morbi tristique vitae mi quis gravida.
-            </p>
-         </div>
-         <div class="card_container">
-            <div id="book_card" class="card">
-               B<br/>O<br/>O<br/>K
-            </div>
-         </div>
-      </section>
-
-      <script type="text/javascript">
-         // From #intro to #info
-         {
-            var ani = new TimelineMax()
-               .add(TweenMax.to("#wipe", 0.5, {width: "100%"}))
-               .add(TweenMax.to("#hiya", 0.00001, {display:"none"}))
-               .add(TweenMax.to("#navbar", 0.00001, {display:"block"}))
-               .add(TweenMax.to("#wipe", 0.5, {width: "0%"}))
-               .add(TweenMax.from("#info_card", 1, { rotationY: 90 }));
-
-            var scene = new ScrollScene({
-                  triggerElement: "#intro",
-                  duration: $(window).height()
-               })
-               .setTween(ani)
-               .setPin("#pinme")
-               .addTo(controller);
-
-            scene.addIndicators();
-         }
-
-         // From #Info to #Cake
-         {
-            var ani = new TimelineMax()
-               .add(TweenMax.to("#info_card", 1, { rotationY: 90 }))
-               .add(TweenMax.from("#cake_card", 1, { rotationY: 90 }));
-
-            var scene = new ScrollScene({
-                  triggerElement: "#info",
-                  duration: $(window).height()
-               })
-               .setTween(ani)
-               .addTo(controller);
-            scene.addIndicators();
-         }
-
-         // From #Cake to #Sup
-         {
-            var ani = new TimelineMax()
-               .add(TweenMax.to("#cake_card", 1, { rotationY: 90 }))
-               .add(TweenMax.from("#sup_card", 1, { rotationY: 90 }));
-
-            var scene = new ScrollScene({
-                  triggerElement: "#cake",
-                  duration: $(window).height()
-               })
-               .setTween(ani)
-               .addTo(controller);
-            scene.addIndicators();
-         }
-
-         // From #Sup to #Book
-         {
-            var ani = new TimelineMax()
-               .add(TweenMax.to("#sup_card", 1, { rotationY: 90 }))
-               .add(TweenMax.from("#book_card", 1, { rotationY: 90 }));
-
-            var scene = new ScrollScene({
-                  triggerElement: "#sup",
-                  duration: $(window).height()
-               })
-               .setTween(ani)
-               .addTo(controller);
-            scene.addIndicators();
-         }
-      </script>
-   </div>
+      });
+   </script>
 </body>
 </html>
