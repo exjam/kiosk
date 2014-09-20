@@ -26,20 +26,6 @@
          height: 100%
       }
 
-      section {
-         width: 100%;
-         height: 100%;
-      }
-
-      #content-wrapper {
-         height: 100%;
-         width: 100%;
-      }
-
-      .fixpos {
-         position: fixed;
-      }
-
       a:link {
          color: #fff;
          text-decoration: none;
@@ -133,10 +119,19 @@
          font-family: 'times_new_roman_mtregular';
          font-size: 70px;
       }
+      
+      #title > div {
+         margin-left: 15px;
+         margin-top: 15px;
+      }
 
       #links {
          max-width: 99%;
          word-spacing: 10px;
+      }
+      
+      #links > div {
+         margin-left: -100px
       }
 
       #social {
@@ -171,6 +166,16 @@
          margin-left: -460px;
          margin-top: -330px;
       }
+      
+      #trigger {
+         width: 100%;
+         height: 10px;
+      }
+      
+      #trigger1_spin {
+         float: left;
+         margin-top: 244px;
+      }
    </style>
 </head>
 <body>
@@ -182,12 +187,12 @@
       <table>
          <tr>
             <td id="title">
-               <div style="margin-left: 15px; margin-top: 15px;">
+               <div>
                   Kiosk
                </div>
             </td>
             <td id="links" align="center">
-               <div style="margin-left: -100px">
+               <div>
                   <a href="#about">About</a>
                   <a href="#contributors">Contributors</a>
                   <a href="#visit">Visit</a>
@@ -205,11 +210,11 @@
    </div>
 
    <a id="about"></a>
-   <div id="trigger1" style="width: 100%; height: 10px;"></div>
+   <div id="trigger1" class="trigger"></div>
 
    <div class="container">
-      <div style="float: left; margin-top: 244px" id="trigger1_spin" ></div>
-      <div class="first_content_spinner" id="first_spinner">
+      <div id="trigger1_spin" ></div>
+      <div id="first_spinner" class="first_content_spinner">
          <img id="spinner1" src="imgs/about_spinner.png" />
       </div>
       <div class="content">
@@ -229,7 +234,7 @@
    </div>
 
    <a id="contributors"></a>
-   <div id="trigger2" style="width: 100%; height: 10px;"></div>
+   <div id="trigger2" class="trigger"></div>
    
    <div class="container">
       <div class="content">
@@ -278,7 +283,7 @@
    </div>
 
    <a id="visit"></a>
-   <div id="trigger3" style="width: 100%; height: 10px;"></div>
+   <div id="trigger3" class="trigger"></div>
 
    <div class="container">
       <div class="content">
@@ -295,15 +300,16 @@
                Thurs 2 Oct 3pm–11pm<br/>
                Fri 3 Oct 12pm–10pm<br/>
                Sat 4 Oct 12pm–10pm<br/>
-               Sun 5 Oct 12pm–9pm<br/><br/>
+               Sun 5 Oct 12pm–9pm<br/>
+               <br/>
                (Happy hour: Thurs/Fri 5pm–7pm)<br/>
             </p>
          </p>
          <p>
             <h2>Party</h2>
             <p class="indent">
-               We are throwing a launch party to celebrate the opening of Kiosk &amp; the start of the Art Licks Weekendon Thursday from 7pm–11pm. The Thigh Gaps will be providing DJ skills, there will be live drawing from <a href="http://patrickmacdonald9.tumblr.com/">Pat Macdonald</a> &amp; <a href="http://elliotfreeman.co.uk/">Elliot Freeman</a>, and <a href="http://kingzog.com/">King Zog</a> &amp; <a href="http://www.kyleplatts.com/">Kyle Platts</a> will be auctioning off their book, 'Tracing Emin', with all proceeds going to Art Against Knives.
-               <br /><br />
+               We are throwing a launch party to celebrate the opening of Kiosk &amp; the start of the Art Licks Weekendon Thursday from 7pm–11pm. The Thigh Gaps will be providing DJ skills, there will be live drawing from <a href="http://patrickmacdonald9.tumblr.com/">Pat Macdonald</a> &amp; <a href="http://elliotfreeman.co.uk/">Elliot Freeman</a>, and <a href="http://kingzog.com/">King Zog</a> &amp; <a href="http://www.kyleplatts.com/">Kyle Platts</a> will be auctioning off their book, 'Tracing Emin', with all proceeds going to Art Against Knives.<br />
+               <br />
                <a href="https://www.facebook.com/events/324334551078234/?fref=ts">Attend on Facebook.</a>
             </p>
          </p>
@@ -314,13 +320,13 @@
    </div>
 
    <a id="contact"></a>
-   <div id="trigger4" style="width: 100%; height: 10px;"></div>
+   <div id="trigger4" class="trigger"></div>
 
    <div class="container">
       <div class="content">
          <p>
             For further information don’t hesitate to get in touch.<br />
-               <a href="mailto:kioskbooks@gmail.com">kioskbooks@gmail.com</a>
+            <a href="mailto:kioskbooks@gmail.com">kioskbooks@gmail.com</a>
          </p>
          <p>
             <h2>Follow us on</h2>
@@ -344,7 +350,7 @@
    </div>
 
    <a id="shop"></a>
-   <div id="trigger5" style="width: 100%; height: 10px;"></div>
+   <div id="trigger5" class="trigger"></div>
 
    <div class="container">
       <div class="content">
@@ -354,10 +360,9 @@
       </div>
    </div>
 
-   <div id="trigger6" style="width: 100%; height: 10px;"></div>
+   <div id="trigger6" class="trigger"></div>
 
    <script type="text/javascript" src="js/scrollmagic.min.js"></script>
-   <script type="text/javascript" src="js/scrollmagic.debug.js"></script>
    <script>
       $(document).ready(function($) {
          var controller = new ScrollMagic();
