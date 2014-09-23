@@ -397,8 +397,7 @@
 
          function getDurationFunc(elem1, elem2) {
             return function() {
-               return elem1.getBoundingClientRect().top
-                    - elem2.getBoundingClientRect().top; 
+               return elem1.getBoundingClientRect().top - elem2.getBoundingClientRect().top;
             };
          }
 
@@ -416,8 +415,9 @@
 
             new ScrollScene({triggerElement: trigger})
                .setTween(ani)
-               .duration(function(){ return elem2.getBoundingClientRect().top
-                    - elem1.getBoundingClientRect().top; })
+               .duration(function() {
+                  return elem2.getBoundingClientRect().top - elem1.getBoundingClientRect().top;
+               })
                .addTo(controller);
          }
 
@@ -427,27 +427,32 @@
          addScene('trigger4', 'trigger5', 'spinner4');
          addScene('trigger5', 'trigger6', 'spinner5');
 
+         // Add special scene for first spinner
          new ScrollScene({triggerElement: '#trigger1_spin'})
             .duration(10)
-            .on('enter', function(){ document.getElementById('first_spinner').className = 'content_spinner'; })
-            .on('leave', function(evt){ if (evt.state === 'BEFORE') { document.getElementById('first_spinner').className = 'first_content_spinner'; } })
+            .on('enter', function() {
+               document.getElementById('first_spinner').className = 'content_spinner';
+            })
+            .on('leave', function(evt) {
+               if (evt.state === 'BEFORE') {
+                  document.getElementById('first_spinner').className = 'first_content_spinner';
+               }
+            })
             .addTo(controller);
 
-         // change behaviour of controller to animate scroll instead of jump
+         // Scroll window instead of jumping
          controller.scrollTo(function (newpos) {
             TweenMax.to(window, 0.5, {scrollTo: {y: newpos}});
          });
 
-         //  bind scroll to anchor links
+         // Set all anchor links to use scrollTo
          $(document).on("click", "a[href^=#]", function (e) {
             var id = $(this).attr("href");
             if ($(id).length > 0) {
                e.preventDefault();
 
-               // trigger scroll
                controller.scrollTo(id);
 
-                  // if supported by the browser we can even update the URL.
                if (window.history && window.history.pushState) {
                   history.pushState("", document.title, id);
                }
