@@ -345,7 +345,7 @@
       $(document).ready(function($) {
          var controller = new ScrollMagic();
 
-         function getDurationFunc(elm1, elem2) {
+         function getDurationFunc(elem1, elem2) {
             return function() {
                return elem1.getBoundingClientRect().top
                     - elem2.getBoundingClientRect().top; 
